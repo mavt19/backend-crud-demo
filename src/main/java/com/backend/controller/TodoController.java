@@ -43,4 +43,12 @@ public class TodoController {
 		Todo todoSave = todoService.create(todo);
 		return  ResponseEntity.ok(todoSave);
 	}
+	@PutMapping("/delete/{id}")
+	private ResponseEntity<?> delete(@PathVariable("id") Long id){
+		Todo todoDelete = todoService.get(id);
+		if(todoDelete == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return  ResponseEntity.ok(todoService.delete(id));
+	}
 }
